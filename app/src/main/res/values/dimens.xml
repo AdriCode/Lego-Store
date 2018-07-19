@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Main Activity-->
+    <dimen name="columnWidth">90dp</dimen>
+    <dimen name="spacing">10dp</dimen>
+
+    <!--List Item-->
+    <dimen name="item_padding">10dp</dimen>
+    <dimen name="item_image_size">60dp</dimen>
+    <dimen name="text_size">10sp</dimen>
+</resources>
