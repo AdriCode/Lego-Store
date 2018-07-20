@@ -6,14 +6,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Data Insertion Theme -->
+    <!-- Editor Theme -->
     <style name="EditorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/InsertionColorPrimary</item>
-        <item name="colorPrimaryDark">@color/InsertionColorPrimaryDark</item>
+        <item name="colorPrimary">@color/EditorColorPrimary</item>
+        <item name="colorPrimaryDark">@color/EditorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Data Insertion fields -->
+    <!-- Editor fields -->
     <style name="InsertionStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>

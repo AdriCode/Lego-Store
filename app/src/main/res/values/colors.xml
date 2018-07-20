@@ -3,9 +3,9 @@
     <!-- Colors for the App -->
     <color name="colorPrimary">#ABDCFF</color>
     <color name="colorPrimaryDark">#0396FF</color>
-    <color name="colorAccent">#FDEB71</color>
+    <color name="colorAccent">#F05F57</color>
 
-    <!-- Colors for the Data Insertion -->
-    <color name="InsertionColorPrimary">#81FBB8</color>
-    <color name="InsertionColorPrimaryDark">#28CF6F</color>
+    <!-- Colors for the Editor -->
+    <color name="EditorColorPrimary">#81FBB8</color>
+    <color name="EditorColorPrimaryDark">#28CF6F</color>
 </resources>
