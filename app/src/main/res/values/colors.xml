@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Colors for the App -->
+    <color name="colorPrimary">#1ea5ff</color>
+    <color name="colorPrimaryDark">#1a8cd8</color>
+    <color name="colorAccent">#fff71e</color>
+
+    <!-- Colors for the Data Insertion -->
+    <color name="InsertionColorPrimary">#37f278</color>
+    <color name="InsertionColorPrimaryDark">#2ac15f</color>
 </resources>

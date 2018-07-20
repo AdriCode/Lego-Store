@@ -3,9 +3,14 @@
     <!--Main Activity-->
     <dimen name="columnWidth">90dp</dimen>
     <dimen name="spacing">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
     <!--List Item-->
     <dimen name="item_padding">10dp</dimen>
     <dimen name="item_image_size">60dp</dimen>
     <dimen name="text_size">10sp</dimen>
+
+    <!--Data Insertion-->
+    <dimen name="editor_padding">10dp</dimen>
+
 </resources>
