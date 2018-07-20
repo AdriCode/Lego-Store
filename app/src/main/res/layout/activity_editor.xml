@@ -19,7 +19,7 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle"
+                style="@style/EditorStyle2"
                 android:text="@string/productName" />
 
             <!-- Field -->
@@ -37,7 +37,7 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle"
+                style="@style/EditorStyle2"
                 android:text="@string/price" />
 
             <!-- Price field -->
@@ -55,7 +55,7 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle"
+                style="@style/EditorStyle2"
                 android:text="@string/quantity" />
 
             <!-- Quatity field -->
@@ -74,7 +74,7 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle"
+                style="@style/EditorStyle2"
                 android:text="@string/supplierName" />
             <!-- Supplier Name field -->
             <EditText
@@ -91,7 +91,7 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle"
+                style="@style/EditorStyle2"
                 android:text="@string/supplierPhone" />
 
             <!-- Supplier Phone field -->

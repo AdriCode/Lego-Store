@@ -40,7 +40,7 @@
         app:fabSize="auto"
         android:scaleType="centerCrop"
         android:elevation="@dimen/elevation"
-        android:src="@drawable/sophia" />
+        android:src="@drawable/legoicon" />
 
 </RelativeLayout>
 
