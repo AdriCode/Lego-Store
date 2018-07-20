@@ -11,6 +11,6 @@
     <dimen name="text_size">10sp</dimen>
 
     <!--Data Insertion-->
-    <dimen name="editor_padding">10dp</dimen>
+    <dimen name="editor_padding">14dp</dimen>
 
 </resources>

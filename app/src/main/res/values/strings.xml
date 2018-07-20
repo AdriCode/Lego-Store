@@ -3,6 +3,7 @@
 
     <!-- Data Insertion -->
     <string name="productName">Product Name</string>
+    <string name="hint_product_name">Name</string>
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="supplierName">Supplier Name</string>
