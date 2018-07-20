@@ -3,7 +3,7 @@
     <!-- Colors for the App -->
     <color name="colorPrimary">#ABDCFF</color>
     <color name="colorPrimaryDark">#0396FF</color>
-    <color name="colorAccent">#F05F57</color>
+    <color name="colorAccent">#1904E5</color>
 
     <!-- Colors for the Editor -->
     <color name="EditorColorPrimary">#81FBB8</color>

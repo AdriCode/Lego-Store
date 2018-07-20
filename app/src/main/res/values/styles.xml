@@ -4,6 +4,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/robotoslabregular</item>
     </style>
 
     <!-- Editor Theme -->
@@ -11,16 +13,17 @@
         <item name="colorPrimary">@color/EditorColorPrimary</item>
         <item name="colorPrimaryDark">@color/EditorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/robotoslabregular</item>
     </style>
 
     <!-- Editor fields -->
-    <style name="InsertionStyle">
+    <style name="EditorStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 

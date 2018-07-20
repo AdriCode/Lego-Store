@@ -13,91 +13,91 @@
         android:padding="@dimen/editor_padding">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <!-- Label -->
             <TextView
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:text="@string/productName" />
 
             <!-- Field -->
             <EditText
                 android:id="@+id/productName"
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:hint="@string/hint_product_name"
                 android:inputType="textCapWords" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <!-- Label -->
             <TextView
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:text="@string/price" />
 
             <!-- Price field -->
             <EditText
                 android:id="@+id/price"
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:hint="@string/price"
                 android:inputType="textCapWords" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <!-- Label -->
             <TextView
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:text="@string/quantity" />
 
             <!-- Quatity field -->
             <EditText
                 android:id="@+id/quantity"
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:hint="@string/quantity"
                 android:inputType="textCapWords" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <!-- Label -->
             <TextView
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:text="@string/supplierName" />
             <!-- Supplier Name field -->
             <EditText
                 android:id="@+id/supplierName"
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:hint="@string/supplierName"
                 android:inputType="textCapWords" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <!-- Label -->
             <TextView
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:text="@string/supplierPhone" />
 
             <!-- Supplier Phone field -->
             <EditText
                 android:id="@+id/supplierPhone"
-                style="@style/InsertionStyle"
+                style="@style/EditorStyle"
                 android:hint="@string/supplierPhone"
                 android:inputType="textCapWords" />
         </LinearLayout>
