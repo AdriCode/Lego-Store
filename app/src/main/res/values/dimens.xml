@@ -11,7 +11,7 @@
     <dimen name="item_image_size">60dp</dimen>
     <dimen name="text_size">10sp</dimen>
 
-    <!--Editor-->
+    <!-- Editor -->
     <dimen name="editor_padding">14dp</dimen>
     <dimen name="editor_input">6dp</dimen>
 

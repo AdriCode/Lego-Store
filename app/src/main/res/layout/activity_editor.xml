@@ -58,7 +58,7 @@
                 style="@style/EditorStyle2"
                 android:text="@string/quantity" />
 
-            <!-- Quatity field -->
+            <!-- Quantity field -->
             <EditText
                 android:id="@+id/quantity"
                 style="@style/EditorStyle"
@@ -76,6 +76,7 @@
             <TextView
                 style="@style/EditorStyle2"
                 android:text="@string/supplierName" />
+
             <!-- Supplier Name field -->
             <EditText
                 android:id="@+id/supplierName"
