@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+
+import com.example.android.legostore.data.LegoContract;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
 
@@ -20,12 +23,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LegoDBHelper mDBHelper;
     private SQLiteDatabase db;
-    private String mProductName;
-    private String mPrice;
-    private String mQuantity;
     private Cursor cursor;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mDBHelper = new LegoDBHelper(this);
+        LegoDBHelper mDBHelper = new LegoDBHelper(this);
+        listView = findViewById(R.id.listView);
         displayData();
     }
 
@@ -68,14 +69,19 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
             }
         }
+
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1, allProducts);
+        listView.setAdapter(arrayAdapter);
     }
 
     private Product getProduct(){
-        mProductName = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRODUCT_NAME));
-        mPrice = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRICE));
-        mQuantity = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_QUANTITY));
+        String mProductName = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRODUCT_NAME));
+        String mPrice = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRICE));
+        String mQuantity = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_QUANTITY));
 
-        Product lego = new Product(mProductName, mPrice, mQuantity);
-        return lego;
+        return new Product(mProductName, mPrice, mQuantity);
     }
 }
