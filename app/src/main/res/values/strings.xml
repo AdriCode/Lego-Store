@@ -1,19 +1,21 @@
 <resources>
-    <string name="app_name">Lego Store</string>
-    <string name="editor_activity_title">Add a Lego</string>
+    <string name="app_name">LEGO Store</string>
+    <string name="editor_activity_title">Add a LEGO</string>
 
     <!-- Editor -->
     <string name="productName">Product Name</string>
     <string name="hint_product_name">Name</string>
+    <string name="priceLabel">Price:</string>
     <string name="price">Price</string>
+    <string name="quantityLabel">Quantity:</string>
     <string name="quantity">Quantity</string>
     <string name="supplierName">Supplier Name</string>
     <string name="supplierPhone">Supplier Phone</string>
 
+    <!-- Menu Main -->
+
     <!-- Menu Editor -->
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
-
-    <!-- Menu Main -->
 
 </resources>

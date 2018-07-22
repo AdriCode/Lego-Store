@@ -4,25 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/item_image_size"
-        android:layout_height="@dimen/item_image_size"
+        android:layout_width="@dimen/item_img_width"
+        android:layout_height="@dimen/item_img_height"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="@dimen/item_padding"
-        android:background="@drawable/legoicon"/>
+        android:layout_marginTop="@dimen/item_img_margin_top"
+        android:background="@drawable/logo"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/product_name"
+            android:id="@+id/ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/item_text_size"
+            android:textAllCaps="true"
+            android:padding="@dimen/item_padding2"
+            tools:text="ID"/>
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:ellipsize="end"
             android:maxLines="1"
@@ -30,30 +43,59 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_size"
-            tools:text="Product Name"
-            android:padding="@dimen/item_padding"/>
+            android:textSize="@dimen/item_text_size"
+            android:layout_below="@id/ID"
+            android:padding="@dimen/item_padding2"
+            tools:text="Product Name"/>
 
-        <TextView
-            android:id="@+id/quantity"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_below="@id/product_name"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:textSize="@dimen/text_size"
+            android:layout_centerHorizontal="true"
             android:padding="@dimen/item_padding"
-            tools:text="Quantity"/>
+            android:id="@+id/Q">
 
-        <TextView
-            android:id="@+id/price"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quantityLabel"
+                android:textSize="@dimen/item_text_size"
+                android:paddingRight="@dimen/item_padding2"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                tools:text="Quantity"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/product_name"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/text_size"
+            android:layout_below="@id/Q"
+            android:layout_centerHorizontal="true"
             android:padding="@dimen/item_padding"
-            tools:text="Price"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceLabel"
+                android:textSize="@dimen/item_text_size"
+                android:paddingRight="@dimen/item_padding2"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/item_text_size"
+                tools:text="Price"/>
+        </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

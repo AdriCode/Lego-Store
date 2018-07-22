@@ -34,7 +34,19 @@
                                   <option name="values">
                                     <map>
                                       <entry key="outputName" value="ic_save" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="launcherLegacy">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="backgroundColor" value="ff321e" />
+                                      <entry key="imageAsset" value="C:\Users\Adri\AndroidStudioProjects\LegoStore\app\src\main\res\drawable\lego_head.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -44,7 +56,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>

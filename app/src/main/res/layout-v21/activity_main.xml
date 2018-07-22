@@ -8,21 +8,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/main_padding"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/editor_padding"
         tools:context=".MainActivity">
 
         <GridView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="auto_fit"
-            android:gravity="center"
-            android:stretchMode="columnWidth"
             android:columnWidth="@dimen/columnWidth"
+            android:gravity="center"
             android:horizontalSpacing="@dimen/spacing"
-            android:verticalSpacing="@dimen/spacing" />
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="@dimen/spacing"
+            tools:ignore="NestedScrolling" />
 
         <TextView
             android:id="@+id/empty_view"
@@ -40,7 +40,9 @@
             android:elevation="@dimen/elevation"
             android:scaleType="centerCrop"
             android:src="@drawable/legoicon"
-            app:fabSize="auto" />
+            app:fabSize="auto"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RtlHardcoded" />
 
     </RelativeLayout>
 </ScrollView>

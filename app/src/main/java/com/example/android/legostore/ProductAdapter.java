@@ -38,23 +38,28 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         // Get the object located at this position in the list
         currentProduct = getItem(position);
-        ImageView ImageEvent = (ImageView) listItemView.findViewById(R.id.image);
+
+        // Find the TextView in the list_item.xml layout with the product ID
+        TextView ID = listItemView.findViewById(R.id.ID);
+        // Get the date from the current event object and set this text on the Product ID TextView
+        ID.setText(String.valueOf(currentProduct.getID()));
 
         // Find the TextView in the list_item.xml layout with the Product Name
-        TextView NameView = (TextView) listItemView.findViewById(R.id.product_name);
+        TextView NameView = listItemView.findViewById(R.id.product_name);
         // Get the date from the current event object and set this text on the Product Name TextView
         NameView.setText(currentProduct.getProductName());
 
         // Find the TextView in the list_item.xml layout with the Price
-        TextView PriceView = (TextView) listItemView.findViewById(R.id.price);
+        TextView PriceView = listItemView.findViewById(R.id.price);
         // Get the title from the current event object and set this text on the Price TextView
         PriceView.setText(currentProduct.getPrice());
 
         // Find the TextView in the list_item.xml layout with the Quantity
-        TextView QuantityView = (TextView) listItemView.findViewById(R.id.quantity);
+        TextView QuantityView = listItemView.findViewById(R.id.quantity);
         // Get the title from the current event object and set this text on the Quantity TextView
         QuantityView.setText(currentProduct.getQuantity());
 
         return listItemView;
     }
+
 }

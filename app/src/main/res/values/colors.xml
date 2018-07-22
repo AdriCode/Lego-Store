@@ -4,6 +4,7 @@
     <color name="colorPrimary">#ABDCFF</color>
     <color name="colorPrimaryDark">#0396FF</color>
     <color name="colorAccent">#f24343</color>
+    <color name="primary_text">#212121</color>
 
     <!-- Colors for the Editor -->
     <color name="EditorColorPrimary">#81FBB8</color>
