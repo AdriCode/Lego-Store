@@ -20,6 +20,7 @@ public class EditorActivity extends AppCompatActivity {
     private EditText mQuantity;
     private EditText mSupplierName;
     private EditText mSupplierPhone;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,10 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.action_save:
                 insertData();
                 finish();
-                return true;
-            case R.id.action_delete:
                 return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
@@ -63,7 +61,7 @@ public class EditorActivity extends AppCompatActivity {
 
     private void insertData() {
         // Gets the database in write mode
-        SQLiteDatabase db = mDBHelper.getWritableDatabase();
+        db = mDBHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(LegoEntry.COLUMN_PRODUCT_NAME, mProductName.getText().toString().trim());
@@ -83,4 +81,5 @@ public class EditorActivity extends AppCompatActivity {
             Toast.makeText(this, "Lego saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
         }
     }
+
 }

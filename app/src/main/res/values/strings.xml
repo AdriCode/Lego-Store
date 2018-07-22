@@ -13,9 +13,9 @@
     <string name="supplierPhone">Supplier Phone</string>
 
     <!-- Menu Main -->
+    <string name="deleteAll">Delete All</string>
 
     <!-- Menu Editor -->
     <string name="action_save">Save</string>
-    <string name="action_delete">Delete</string>
 
 </resources>
