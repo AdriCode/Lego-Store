@@ -1,6 +1,7 @@
 package com.example.android.legostore;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -29,13 +30,7 @@ public class EditorActivity extends AppCompatActivity {
 
         // Create database helper
         mDBHelper = new LegoDBHelper(this);
-
-        // Find all relevant views that we will need to read user input from
-        mProductName = (EditText) findViewById(R.id.productName);
-        mPrice = (EditText) findViewById(R.id.price);
-        mQuantity = (EditText) findViewById(R.id.quantity);
-        mSupplierName = (EditText) findViewById(R.id.supplierName);
-        mSupplierPhone = (EditText) findViewById(R.id.supplierPhone);
+        getViews();
     }
 
     @Override
@@ -80,6 +75,15 @@ public class EditorActivity extends AppCompatActivity {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
             Toast.makeText(this, "Lego saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void getViews(){
+        // Find all relevant views that we will need to read user input from
+        mProductName = (EditText) findViewById(R.id.productName);
+        mPrice = (EditText) findViewById(R.id.price);
+        mQuantity = (EditText) findViewById(R.id.quantity);
+        mSupplierName = (EditText) findViewById(R.id.supplierName);
+        mSupplierPhone = (EditText) findViewById(R.id.supplierPhone);
     }
 
 }

@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Product> allProducts;
     private LegoDBHelper mDBHelper = null;
     private GridView listView;
-    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mDBHelper = new LegoDBHelper(this);
-        mContext = getApplicationContext();
         displayData();
 
         // Setup when clicked on list item to open EditorActivity with item details
@@ -103,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         displayData();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_main.xml file.
@@ -121,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     private void deleteAll() {
         db = mDBHelper.getWritableDatabase();
