@@ -1,16 +1,21 @@
-package com.example.android.legostore;
+package com.example.android.legostore.data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class LegoProvider extends ContentProvider {
+    private Context mContext = getContext();
+    public LegoDBHelper mDBHelper;
+
     @Override
     public boolean onCreate() {
-        return false;
+        mDBHelper = new LegoDBHelper(mContext);
+        return true;
     }
 
     @Nullable

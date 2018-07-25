@@ -26,6 +26,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <provider
+            android:name=".data.LegoProvider"
+            android:authorities="com.example.android.legostore"
+            android:exported="false" />
     </application>
 
 </manifest>

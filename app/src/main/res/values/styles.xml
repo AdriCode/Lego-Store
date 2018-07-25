@@ -4,7 +4,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/robotoslabbold</item>
     </style>
 
@@ -13,7 +13,7 @@
         <item name="colorPrimary">@color/EditorColorPrimary</item>
         <item name="colorPrimaryDark">@color/EditorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/robotoslabbold</item>
     </style>
 
@@ -23,7 +23,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">14dp</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/robotoslabregular</item>
     </style>
@@ -34,7 +34,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">14dp</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/robotoslabbold</item>
     </style>
