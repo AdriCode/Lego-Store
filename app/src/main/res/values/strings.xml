@@ -17,5 +17,7 @@
 
     <!-- Menu Editor -->
     <string name="action_save">Save</string>
+    <string name="editor_insert_lego_successful">Lego saved</string>
+    <string name="editor_insert_lego_failed">Error with saving product</string>
 
 </resources>

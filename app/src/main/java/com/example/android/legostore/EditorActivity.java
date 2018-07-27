@@ -3,6 +3,7 @@ package com.example.android.legostore;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -74,6 +75,20 @@ public class EditorActivity extends AppCompatActivity {
         } else {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
             Toast.makeText(this, "Lego saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+        }
+
+        // Insert a new product into the provider, returning the content URI for the new item.
+        Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
+
+        // Show a toast message depending on whether or not the insertion was successful
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(this, getString(R.string.editor_insert_lego_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(this, getString(R.string.editor_insert_lego_successful),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

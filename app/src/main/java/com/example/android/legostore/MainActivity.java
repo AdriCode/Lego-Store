@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 LegoEntry.COLUMN_QUANTITY,
         };
 
-        Cursor cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
+        cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
 
         listView = findViewById(R.id.list_view);
         allProducts = new ArrayList<>();

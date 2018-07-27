@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import android.content.UriMatcher;
+import android.widget.Toast;
+import android.util.Log;
 
 public class LegoProvider extends ContentProvider {
 
@@ -25,6 +27,9 @@ public class LegoProvider extends ContentProvider {
 
     //UriMatcher object to match a content URI to a corresponding code.
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    /** Tag for the log messages */
+    public static final String LOG_TAG = LegoProvider.class.getSimpleName();
 
     static {
         // Added 2 content URIs to URI matcher
@@ -73,10 +78,33 @@ public class LegoProvider extends ContentProvider {
         return null;
     }
 
-    @Nullable
     @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+    public Uri insert(Uri uri, ContentValues contentValues) {
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case LEGO:
+                return insertLego(uri, contentValues);
+            default:
+                throw new IllegalArgumentException("Insertion is not supported for " + uri);
+        }
+    }
+
+    /**
+     * Insert a product into the database with the given content values. Return the new content URI
+     * for that specific row in the database.
+     */
+    private Uri insertLego(Uri uri, ContentValues values) {
+        // Get writeable database
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        Long id = db.insert(LegoEntry.TABLE_NAME, null, values);
+
+        // Show a toast message depending on whether or not the insertion was successful
+        if (id == -1) {
+            Toast.makeText(mContext, "Error with saving lego", Toast.LENGTH_SHORT).show();
+        }
+
+        return ContentUris.withAppendedId(uri, id);
     }
 
     @Override
