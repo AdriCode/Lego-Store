@@ -16,7 +16,6 @@ import android.widget.GridView;
 
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent review = new Intent(MainActivity.this, EditorActivity.class);
                 Uri item = ContentUris.withAppendedId(LegoEntry.CONTENT_URI, id);
                 review.setData(item);
-                startActivity(review);
+                startActivityForResult(review, position);
             }
         });
     }
