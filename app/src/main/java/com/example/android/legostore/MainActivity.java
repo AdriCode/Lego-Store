@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayData() {
 
-        db = mDBHelper.getReadableDatabase();
-
         //Projection string
         String[] projection = {
                 LegoEntry.COLUMN_ID,
@@ -68,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 LegoEntry.COLUMN_QUANTITY,
         };
 
-        cursor = db.query(LegoEntry.TABLE_NAME, projection, null, null, null, null, null);
+        Cursor cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
+
         listView = findViewById(R.id.list_view);
         allProducts = new ArrayList<>();
 
