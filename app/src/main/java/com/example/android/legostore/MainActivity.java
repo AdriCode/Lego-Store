@@ -16,13 +16,10 @@ import android.widget.GridView;
 
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SQLiteDatabase db;
     private Cursor cursor;
-    private ArrayList<Product> allProducts;
     private LegoDBHelper mDBHelper = null;
     private GridView listView;
 
@@ -41,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mDBHelper = new LegoDBHelper(this);
         displayData();
 
         // Setup when clicked on list item to open EditorActivity with item details
@@ -67,15 +63,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
-
         listView = findViewById(R.id.list_view);
-        allProducts = new ArrayList<>();
 
         try {
             // Iterate through all the returned rows in the cursor
             while (cursor.moveToNext()) {
-                allProducts.add(getProduct());
-                ProductAdapter Adapter = new ProductAdapter(this, allProducts);
+                ProductCursorAdapter Adapter = new ProductCursorAdapter(this, cursor);
                 listView.setAdapter(Adapter);
             }
         } finally {
@@ -117,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteAll() {
-        db = mDBHelper.getWritableDatabase();
+        SQLiteDatabase db = mDBHelper.getWritableDatabase();
         db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + LegoEntry.TABLE_NAME + "'");
         db.delete(LegoEntry.TABLE_NAME, null, null);
         cursor.close();

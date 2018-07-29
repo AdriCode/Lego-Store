@@ -56,26 +56,15 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void insertData() {
-        // Gets the database in write mode
-        db = mDBHelper.getWritableDatabase();
 
+        // Create a ContentValues object where column names are the keys,
+        // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(LegoEntry.COLUMN_PRODUCT_NAME, mProductName.getText().toString().trim());
         values.put(LegoEntry.COLUMN_PRICE, mPrice.getText().toString().trim());
         values.put(LegoEntry.COLUMN_QUANTITY, mQuantity.getText().toString().trim());
         values.put(LegoEntry.COLUMN_SUPPLIER_NAME, mSupplierName.getText().toString().trim());
         values.put(LegoEntry.COLUMN_SUPPLIER_PHONE, mSupplierPhone.getText().toString().trim());
-
-        Long newRowId = db.insert(LegoEntry.TABLE_NAME, null, values);
-
-        // Show a toast message depending on whether or not the insertion was successful
-        if (newRowId == -1) {
-            // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving lego", Toast.LENGTH_SHORT).show();
-        } else {
-            // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Lego saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
-        }
 
         // Insert a new product into the provider, returning the content URI for the new item.
         Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);

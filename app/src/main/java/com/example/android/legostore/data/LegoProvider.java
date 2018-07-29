@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import android.content.UriMatcher;
 import android.widget.Toast;
-import android.util.Log;
 
 public class LegoProvider extends ContentProvider {
 
