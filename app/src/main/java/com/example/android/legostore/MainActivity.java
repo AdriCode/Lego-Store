@@ -17,12 +17,14 @@ import android.widget.GridView;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
 import android.app.LoaderManager;
+import android.content.CursorLoader;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private Cursor cursor;
+    private static final int LEGO_LOADER = 0;
     private LegoDBHelper mDBHelper = null;
     private GridView listView;
+    private ProductCursorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         View emptyView = findViewById(R.id.empty_view);
         listView.setEmptyView(emptyView);
 
+        //Setting the cursor adapter
+        adapter = new ProductCursorAdapter(this, null);
+        listView.setAdapter(adapter);
+
         // FAB to open EditorActivity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(intent);
             }
         });
-
-        displayData();
 
         // Setup when clicked on list item to open EditorActivity with item details
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,29 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private void displayData() {
-
-        //Projection string
-        String[] projection = {
-                LegoEntry.COLUMN_ID,
-                LegoEntry.COLUMN_PRODUCT_NAME,
-                LegoEntry.COLUMN_PRICE,
-                LegoEntry.COLUMN_QUANTITY,
-        };
-
-        cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
-        listView = findViewById(R.id.list_view);
-        ProductCursorAdapter Adapter = new ProductCursorAdapter(this, cursor);
-        listView.setAdapter(Adapter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayData();
+        getLoaderManager().initLoader(LEGO_LOADER, null, this);
     }
 
     @Override
@@ -108,23 +90,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SQLiteDatabase db = mDBHelper.getWritableDatabase();
         db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + LegoEntry.TABLE_NAME + "'");
         db.delete(LegoEntry.TABLE_NAME, null, null);
-        cursor.close();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+        String[] projection = {
+                LegoEntry.COLUMN_ID,
+                LegoEntry.COLUMN_PRODUCT_NAME,
+                LegoEntry.COLUMN_PRICE,
+                LegoEntry.COLUMN_QUANTITY,
+        };
+
+        return new CursorLoader(this, LegoEntry.CONTENT_URI, projection, null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        adapter.swapCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        adapter.swapCursor(null);
     }
 }
