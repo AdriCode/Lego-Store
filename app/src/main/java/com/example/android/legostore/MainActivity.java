@@ -1,23 +1,24 @@
 package com.example.android.legostore;
 
 import android.content.ContentUris;
+import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
+import android.app.LoaderManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Cursor cursor;
     private LegoDBHelper mDBHelper = null;
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Find the ListView which will be populated with the data
+        listView = findViewById(R.id.list_view);
+
+        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
+        View emptyView = findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyView);
 
         // FAB to open EditorActivity
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -50,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(review, position);
             }
         });
+
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+        getLoaderManager().initLoader(0, null, this);
     }
 
     private void displayData() {
@@ -64,25 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         cursor = getContentResolver().query(LegoEntry.CONTENT_URI, projection, null, null, null);
         listView = findViewById(R.id.list_view);
-
-        try {
-            // Iterate through all the returned rows in the cursor
-            while (cursor.moveToNext()) {
-                ProductCursorAdapter Adapter = new ProductCursorAdapter(this, cursor);
-                listView.setAdapter(Adapter);
-            }
-        } finally {
-            cursor.close();
-        }
-    }
-
-    private Product getProduct() {
-        int mID = cursor.getInt(cursor.getColumnIndex(LegoEntry.COLUMN_ID));
-        String mProductName = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRODUCT_NAME));
-        String mPrice = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_PRICE));
-        String mQuantity = cursor.getString(cursor.getColumnIndex(LegoEntry.COLUMN_QUANTITY));
-
-        return new Product(mID, mProductName, mPrice, mQuantity);
+        ProductCursorAdapter Adapter = new ProductCursorAdapter(this, cursor);
+        listView.setAdapter(Adapter);
     }
 
     @Override
@@ -116,5 +111,20 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }

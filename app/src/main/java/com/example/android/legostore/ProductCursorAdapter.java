@@ -33,7 +33,7 @@ public class ProductCursorAdapter extends CursorAdapter{
 
         // Extract Properties from cursor
         imageView.setImageResource(R.drawable.logo);
-        ID.setText(String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_ID))));
+        ID.setText(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_ID))));
         NameView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_PRODUCT_NAME)));
         PriceView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_PRICE)));
         QuantityView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_QUANTITY)));
