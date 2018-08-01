@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Intent review = new Intent(MainActivity.this, EditorActivity.class);
                 Uri item = ContentUris.withAppendedId(LegoEntry.CONTENT_URI, id);
                 review.setData(item);
-                startActivityForResult(review, position);
+                startActivity(review);
             }
         });
 

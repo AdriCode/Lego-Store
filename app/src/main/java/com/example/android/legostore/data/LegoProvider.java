@@ -47,7 +47,7 @@ public class LegoProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         // Get readable database
-       db = mDbHelper.getReadableDatabase();
+        db = mDbHelper.getReadableDatabase();
 
         // This cursor will hold the result of the query
         Cursor cursor = null;
@@ -74,14 +74,16 @@ public class LegoProvider extends ContentProvider {
         return cursor;
     }
 
+    @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
         return null;
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         final int match = sUriMatcher.match(uri);
+
         switch (match) {
             case LEGO:
                 return insertLego(uri, contentValues);
@@ -103,6 +105,7 @@ public class LegoProvider extends ContentProvider {
         if (id == -1) {
             Toast.makeText(mContext, "Error with saving lego", Toast.LENGTH_SHORT).show();
         }
+        else{ getContext().getContentResolver().notifyChange(uri, null);}
 
         return ContentUris.withAppendedId(uri, id);
     }
@@ -117,7 +120,6 @@ public class LegoProvider extends ContentProvider {
         if (dataDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
         return dataDeleted;
     }
 
@@ -133,7 +135,6 @@ public class LegoProvider extends ContentProvider {
         if (dataChanged != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
         return dataChanged;
     }
 }
