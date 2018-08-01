@@ -96,5 +96,6 @@
                 android:textSize="@dimen/item_text_size"
                 tools:text="Price"/>
         </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

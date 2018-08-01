@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int LEGO_LOADER = 0;
     private LegoDBHelper mDBHelper = null;
-    private GridView listView;
     private ProductCursorAdapter adapter;
 
     @Override
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         // Find the ListView which will be populated with the data
-        listView = findViewById(R.id.list_view);
+        GridView listView = findViewById(R.id.list_view);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);

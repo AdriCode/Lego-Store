@@ -7,16 +7,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import android.content.UriMatcher;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 public class LegoProvider extends ContentProvider {
 
     private Context mContext = getContext();
     public LegoDBHelper mDbHelper;
+    private SQLiteDatabase db;
 
     // URI matcher code for the content URI for the Lego table
     private static final int LEGO = 100;
@@ -46,7 +47,7 @@ public class LegoProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         // Get readable database
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+       db = mDbHelper.getReadableDatabase();
 
         // This cursor will hold the result of the query
         Cursor cursor = null;
@@ -68,10 +69,11 @@ public class LegoProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
+
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
 
-    @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
         return null;
@@ -90,11 +92,10 @@ public class LegoProvider extends ContentProvider {
 
     /**
      * Insert a product into the database with the given content values. Return the new content URI
-     * for that specific row in the database.
      */
     private Uri insertLego(Uri uri, ContentValues values) {
         // Get writeable database
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        db = mDbHelper.getWritableDatabase();
 
         Long id = db.insert(LegoEntry.TABLE_NAME, null, values);
 
@@ -108,11 +109,31 @@ public class LegoProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+        // Delete a single row given by the ID in the URI
+        int dataDeleted = db.delete(LegoEntry.TABLE_NAME, selection, selectionArgs);
+
+        // If 1 or more rows were deleted, then notify all listeners the data at the URI
+        if (dataDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return dataDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        // Get writeable database
+        db = mDbHelper.getWritableDatabase();
+
+        // Update the database and get the number of rows affected
+        int dataChanged = db.update(LegoEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        // If data changed, then notify all listeners the data at the URI
+        if (dataChanged != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return dataChanged;
     }
 }
