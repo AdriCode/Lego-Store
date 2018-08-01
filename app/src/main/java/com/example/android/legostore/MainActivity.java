@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
+        // Prepare the loader.  Either re-connect with an existing one or start a new one.
         getLoaderManager().initLoader(LEGO_LOADER, null, this);
     }
 
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 LegoEntry.COLUMN_PRICE,
                 LegoEntry.COLUMN_QUANTITY,
         };
-
         return new CursorLoader(this, LegoEntry.CONTENT_URI, projection, null, null, null);
     }
 

@@ -23,7 +23,6 @@ public class ProductCursorAdapter extends CursorAdapter{
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-
         // Find fields to populate
         ImageView imageView = view.findViewById(R.id.image);
         TextView ID = view.findViewById(R.id.ID);

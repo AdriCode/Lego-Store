@@ -1,8 +1,10 @@
 package com.example.android.legostore;
 
+import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +16,16 @@ import android.widget.Toast;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import com.example.android.legostore.data.LegoDBHelper;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private LegoDBHelper mDBHelper;
     private EditText mProductName;
     private EditText mPrice;
     private EditText mQuantity;
     private EditText mSupplierName;
     private EditText mSupplierPhone;
-    private SQLiteDatabase db;
+    private static final int LEGO_LOADER = 0;
+    private Uri currentUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,11 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
 
         // Create database helper
-        mDBHelper = new LegoDBHelper(this);
+        LegoDBHelper mDBHelper = new LegoDBHelper(this);
         getViews();
+
+        // Prepare the loader.  Either re-connect with an existing one or start a new one.
+        getLoaderManager().initLoader(LEGO_LOADER, null, this);
     }
 
     @Override
@@ -56,7 +62,6 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void insertData() {
-
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -90,4 +95,37 @@ public class EditorActivity extends AppCompatActivity {
         mSupplierPhone = (EditText) findViewById(R.id.supplierPhone);
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = {
+                LegoEntry.COLUMN_ID,
+                LegoEntry.COLUMN_PRODUCT_NAME,
+                LegoEntry.COLUMN_PRICE,
+                LegoEntry.COLUMN_QUANTITY,
+        };
+        return new CursorLoader(this, currentUri, projection, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Proceed with moving to the first row of the cursor and reading data from it
+        if (data.moveToFirst()) {
+            //Update the views on the screen with the values from the database
+            mProductName.setText(String.valueOf(data.getInt(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRODUCT_NAME))));
+            mPrice.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRICE)));
+            mQuantity.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_QUANTITY)));
+            mSupplierName.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_SUPPLIER_NAME)));
+            mSupplierPhone.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_SUPPLIER_PHONE)));
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        loader.reset();
+        mProductName.setText("");
+        mPrice.setText("");
+        mQuantity.setText("");
+        mSupplierName.setText("");
+        mSupplierPhone.setText("");
+    }
 }
