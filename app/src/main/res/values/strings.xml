@@ -18,7 +18,8 @@
 
     <!-- Menu Editor -->
     <string name="action_save">Save</string>
-    <string name="editor_insert_lego_successful">Lego saved</string>
-    <string name="editor_insert_lego_failed">Error with saving product</string>
-
+    <string name="save_lego_successful">Lego saved</string>
+    <string name="save_lego_failed">Error with saving product</string>
+    <string name="update_lego_successful">Lego Updated</string>
+    <string name="update_lego_failed">Error with updating product</string>
 </resources>

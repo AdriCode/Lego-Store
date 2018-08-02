@@ -15,16 +15,15 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
-import com.example.android.legostore.data.LegoDBHelper;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int LEGO_LOADER = 0;
     private EditText mProductName;
     private EditText mPrice;
     private EditText mQuantity;
     private EditText mSupplierName;
     private EditText mSupplierPhone;
-    private static final int LEGO_LOADER = 0;
     private Uri currentUri;
 
 
@@ -60,7 +59,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
-                insertData();
+                saveData();
                 finish();
                 return true;
             case android.R.id.home:
@@ -70,7 +69,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
-    private void insertData() {
+    private void saveData() {
+
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
@@ -80,18 +80,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(LegoEntry.COLUMN_SUPPLIER_NAME, mSupplierName.getText().toString().trim());
         values.put(LegoEntry.COLUMN_SUPPLIER_PHONE, mSupplierPhone.getText().toString().trim());
 
-        // Insert a new product into the provider, returning the content URI for the new item.
-        Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
+        if (currentUri == null){
+            // Insert a new product into the provider, returning the content URI for the new item.
+            Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
 
-        // Show a toast message depending on whether or not the insertion was successful
-        if (newUri == null) {
-            // If the new content URI is null, then there was an error with insertion.
-            Toast.makeText(this, getString(R.string.editor_insert_lego_failed),
-                    Toast.LENGTH_SHORT).show();
+            // Show a toast message depending on whether or not the insertion was successful
+            if (newUri == null) {
+                // If the new content URI is null, then there was an error with insertion.
+                Toast.makeText(this, getString(R.string.save_lego_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the insertion was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.save_lego_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
-            // Otherwise, the insertion was successful and we can display a toast.
-            Toast.makeText(this, getString(R.string.editor_insert_lego_successful),
-                    Toast.LENGTH_SHORT).show();
+            int updated = getContentResolver().update(currentUri, values, null, null);
+
+            // Show a toast message depending on whether or not the update was successful.
+            if (updated == 0) {
+                // If no rows were affected, then there was an error with the update.
+                Toast.makeText(this, getString(R.string.update_lego_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the update was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.update_lego_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
