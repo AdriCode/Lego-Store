@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,7 +21,6 @@ import android.content.CursorLoader;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LEGO_LOADER = 0;
-    private LegoDBHelper mDBHelper = null;
     private ProductCursorAdapter adapter;
 
     @Override
@@ -41,15 +39,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         adapter = new ProductCursorAdapter(this, null);
         listView.setAdapter(adapter);
 
-        // FAB to open EditorActivity
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-                startActivity(intent);
-            }
-        });
+        // Prepare the loader.  Either re-connect with an existing one or start a new one.
+        getLoaderManager().initLoader(LEGO_LOADER, null, this);
 
         // Setup when clicked on list item to open EditorActivity with item details
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,8 +53,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Prepare the loader.  Either re-connect with an existing one or start a new one.
-        getLoaderManager().initLoader(LEGO_LOADER, null, this);
+        // FAB to open EditorActivity
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -85,9 +83,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void deleteAll() {
-        SQLiteDatabase db = mDBHelper.getWritableDatabase();
-        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + LegoEntry.TABLE_NAME + "'");
-        db.delete(LegoEntry.TABLE_NAME, null, null);
+        getContentResolver().delete(LegoEntry.CONTENT_URI, null, null);
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
@@ -106,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         adapter.swapCursor(data);
-
     }
 
     @Override

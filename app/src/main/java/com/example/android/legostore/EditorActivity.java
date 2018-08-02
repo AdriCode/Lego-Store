@@ -3,6 +3,7 @@ package com.example.android.legostore;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -32,8 +33,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        // Create database helper
-        LegoDBHelper mDBHelper = new LegoDBHelper(this);
+        Intent intent = getIntent();
+        Uri currentUri = intent.getData();
+
+        if (currentUri == null){
+            setTitle(getString(R.string.add_lego_title));
+        } else{
+            setTitle(getString(R.string.edit_lego_title));
+        }
+
+        //Views relate to the inputs about the product
         getViews();
 
         // Prepare the loader.  Either re-connect with an existing one or start a new one.

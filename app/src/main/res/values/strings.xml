@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LEGO Store</string>
-    <string name="editor_activity_title">Add a LEGO</string>
+    <string name="add_lego_title">Add a LEGO</string>
+    <string name="edit_lego_title">Edit LEGO</string>
 
     <!-- Editor -->
     <string name="productName">Product Name</string>
