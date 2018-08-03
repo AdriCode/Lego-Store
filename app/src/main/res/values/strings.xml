@@ -22,4 +22,5 @@
     <string name="save_lego_failed">Error with saving product</string>
     <string name="update_lego_successful">Lego Updated</string>
     <string name="update_lego_failed">Error with updating product</string>
+    <string name="fields_empty">Please, insert all product details</string>
 </resources>
