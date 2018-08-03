@@ -26,14 +26,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mSupplierPhone;
     private Uri currentUri;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
         Intent intent = getIntent();
-        Uri currentUri = intent.getData();
+        currentUri = intent.getData();
 
         if (currentUri == null){
             setTitle(getString(R.string.add_lego_title));
@@ -70,7 +69,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     private void saveData() {
-
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();

@@ -6,10 +6,6 @@ import android.content.ContentResolver;
 
 public class LegoContract {
 
-    static final String PATH_ENTERPRISES = "enterprises";
-
-    public static final String PATH_TRANSACTIONS = "transactions";
-
     //Empty constructor
     public LegoContract() {}
 

@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
-import com.example.android.legostore.data.LegoDBHelper;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 
