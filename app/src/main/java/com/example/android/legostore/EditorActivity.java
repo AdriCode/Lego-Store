@@ -38,13 +38,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(getString(R.string.add_lego_title));
         } else{
             setTitle(getString(R.string.edit_lego_title));
+            getLoaderManager().initLoader(LEGO_LOADER, null, this);
         }
 
         //Views relate to the inputs about the product
         getViews();
-
-        // Prepare the loader.  Either re-connect with an existing one or start a new one.
-        getLoaderManager().initLoader(LEGO_LOADER, null, this);
     }
 
     @Override
@@ -133,11 +131,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Proceed with moving to the first row of the cursor and reading data from it
         if (data.moveToFirst()) {
             //Update the views on the screen with the values from the database
-            mProductName.setText(String.valueOf(data.getInt(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRODUCT_NAME))));
-            mPrice.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRICE)));
-            mQuantity.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_QUANTITY)));
+            mProductName.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRODUCT_NAME)));
+            mPrice.setText(String.valueOf(data.getLong(data.getColumnIndexOrThrow(LegoEntry.COLUMN_PRICE))));
+            mQuantity.setText(String.valueOf(data.getInt(data.getColumnIndexOrThrow(LegoEntry.COLUMN_QUANTITY))));
             mSupplierName.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_SUPPLIER_NAME)));
-            mSupplierPhone.setText(data.getString(data.getColumnIndexOrThrow(LegoEntry.COLUMN_SUPPLIER_PHONE)));
+            mSupplierPhone.setText(String.valueOf(data.getLong(data.getColumnIndexOrThrow(LegoEntry.COLUMN_SUPPLIER_PHONE))));
         }
     }
 

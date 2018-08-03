@@ -43,7 +43,7 @@ public class LegoProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
 
         // Get readable database
@@ -97,7 +97,7 @@ public class LegoProvider extends ContentProvider {
      */
     private Uri insertLego(Uri uri, ContentValues values) {
         // Get writeable database
-        db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         Long id = db.insert(LegoEntry.TABLE_NAME, null, values);
 
@@ -126,7 +126,7 @@ public class LegoProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         // Get writeable database
-        db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Update the database and get the number of rows affected
         int dataChanged = db.update(LegoEntry.TABLE_NAME, values, selection, selectionArgs);
