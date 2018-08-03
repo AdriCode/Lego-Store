@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 public class LegoProvider extends ContentProvider {
 
-    private Context mContext = getContext();
     public LegoDBHelper mDbHelper;
     private SQLiteDatabase db;
 
@@ -39,18 +38,19 @@ public class LegoProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        mDbHelper = new LegoDBHelper(mContext);
+        mDbHelper = new LegoDBHelper(getContext());
         return true;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
+
         // Get readable database
-        db = mDbHelper.getReadableDatabase();
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         // This cursor will hold the result of the query
-        Cursor cursor = null;
+        Cursor cursor;
 
         // Figure out if the URI matcher can match the URI to a specific code
         int match = sUriMatcher.match(uri);
@@ -103,7 +103,7 @@ public class LegoProvider extends ContentProvider {
 
         // Show a toast message depending on whether or not the insertion was successful
         if (id == -1) {
-            Toast.makeText(mContext, "Error with saving lego", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error with saving lego", Toast.LENGTH_SHORT).show();
         }
         else{ getContext().getContentResolver().notifyChange(uri, null);}
 
