@@ -10,10 +10,12 @@ import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -34,9 +36,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Intent intent = getIntent();
         currentUri = intent.getData();
 
-        if (currentUri == null){
+        if (currentUri == null) {
             setTitle(getString(R.string.add_lego_title));
-        } else{
+        } else {
             setTitle(getString(R.string.edit_lego_title));
             getLoaderManager().initLoader(LEGO_LOADER, null, this);
         }
@@ -76,19 +78,29 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(LegoEntry.COLUMN_SUPPLIER_NAME, mSupplierName.getText().toString().trim());
         values.put(LegoEntry.COLUMN_SUPPLIER_PHONE, mSupplierPhone.getText().toString().trim());
 
-        if (currentUri == null){
-            // Insert a new product into the provider, returning the content URI for the new item.
-            Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
-
-            // Show a toast message depending on whether or not the insertion was successful
-            if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.save_lego_failed),
-                        Toast.LENGTH_SHORT).show();
+        if (currentUri == null) {
+            //Validate that the input fields are not empty
+            if (TextUtils.isEmpty(mProductName.getText().toString()) &&
+                    TextUtils.isEmpty(mPrice.getText().toString()) &&
+                    TextUtils.isEmpty(mQuantity.getText().toString()) &&
+                    TextUtils.isEmpty(mSupplierName.getText().toString()) &&
+                    TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
+                finish();
             } else {
-                // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.save_lego_successful),
-                        Toast.LENGTH_SHORT).show();
+
+                // Insert a new product into the provider, returning the content URI for the new item.
+                Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
+
+                // Show a toast message depending on whether or not the insertion was successful
+                if (newUri == null) {
+                    // If the new content URI is null, then there was an error with insertion.
+                    Toast.makeText(this, getString(R.string.save_lego_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // Otherwise, the insertion was successful and we can display a toast.
+                    Toast.makeText(this, getString(R.string.save_lego_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         } else {
             int updated = getContentResolver().update(currentUri, values, null, null);
@@ -106,7 +118,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
-    private void getViews(){
+    private void getViews() {
         // Find all relevant views that we will need to read user input from
         mProductName = (EditText) findViewById(R.id.productName);
         mPrice = (EditText) findViewById(R.id.price);
