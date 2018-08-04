@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent review = new Intent(MainActivity.this, EditorActivity.class);
-                Uri item = ContentUris.withAppendedId(LegoEntry.CONTENT_URI, id);
-                review.setData(item);
-                startActivity(review);
+                Intent updateProduct = new Intent(MainActivity.this, EditorActivity.class);
+                Uri product = ContentUris.withAppendedId(LegoEntry.CONTENT_URI, id);
+                updateProduct.setData(product);
+                startActivity(updateProduct);
             }
         });
 
@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void deleteAll() {
         getContentResolver().delete(LegoEntry.CONTENT_URI, null, null);
-//        Intent i = new Intent(this, MainActivity.class);
-//        startActivity(i);
     }
 
     @Override

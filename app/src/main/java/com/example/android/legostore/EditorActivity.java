@@ -86,6 +86,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     TextUtils.isEmpty(mSupplierName.getText().toString()) &&
                     TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
                 Toast.makeText(this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
+                finish();
             } else {
 
                 // Insert a new product into the provider, returning the content URI for the new item.
@@ -134,6 +135,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 LegoEntry.COLUMN_PRODUCT_NAME,
                 LegoEntry.COLUMN_PRICE,
                 LegoEntry.COLUMN_QUANTITY,
+                LegoEntry.COLUMN_SUPPLIER_NAME,
+                LegoEntry.COLUMN_SUPPLIER_PHONE,
         };
         return new CursorLoader(this, currentUri, projection, null, null, null);
     }
