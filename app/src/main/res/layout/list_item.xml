@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:background="@android:color/background_light">
+        android:background="@android:color/background_light"
+        android:layout_marginBottom="@dimen/item_img_margin_top">
 
         <RelativeLayout
             android:layout_width="wrap_content"
