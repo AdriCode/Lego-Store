@@ -86,7 +86,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     TextUtils.isEmpty(mSupplierName.getText().toString()) &&
                     TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
                 Toast.makeText(this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
-                return;
             } else {
 
                 // Insert a new product into the provider, returning the content URI for the new item.

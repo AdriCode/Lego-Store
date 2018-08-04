@@ -112,6 +112,8 @@ public class LegoProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        // Get writable database
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Delete a single row given by the ID in the URI
         int dataDeleted = db.delete(LegoEntry.TABLE_NAME, selection, selectionArgs);

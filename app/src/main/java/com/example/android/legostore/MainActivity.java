@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void deleteAll() {
         getContentResolver().delete(LegoEntry.CONTENT_URI, null, null);
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(this, MainActivity.class);
+//        startActivity(i);
     }
 
     @Override
