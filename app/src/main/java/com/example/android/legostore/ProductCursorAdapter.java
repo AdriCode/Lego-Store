@@ -25,14 +25,12 @@ public class ProductCursorAdapter extends CursorAdapter{
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate
         ImageView imageView = view.findViewById(R.id.image);
-        TextView ID = view.findViewById(R.id.ID);
         TextView NameView = view.findViewById(R.id.product_name);
         TextView PriceView = view.findViewById(R.id.price);
         TextView QuantityView = view.findViewById(R.id.quantity);
 
         // Extract Properties from cursor
         imageView.setImageResource(R.drawable.logo);
-        ID.setText(String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_ID))));
         NameView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_PRODUCT_NAME)));
         PriceView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_PRICE)));
         QuantityView.setText(cursor.getString(cursor.getColumnIndexOrThrow(LegoEntry.COLUMN_QUANTITY)));

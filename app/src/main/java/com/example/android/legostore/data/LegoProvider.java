@@ -7,6 +7,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+
+import com.example.android.legostore.R;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import android.content.UriMatcher;
 import android.support.annotation.NonNull;

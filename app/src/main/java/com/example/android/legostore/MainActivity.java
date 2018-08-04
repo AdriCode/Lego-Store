@@ -4,6 +4,7 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
+import com.example.android.legostore.data.LegoDBHelper;
+
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int LEGO_LOADER = 0;
     private ProductCursorAdapter adapter;
+    private LegoDBHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void deleteAll() {
         getContentResolver().delete(LegoEntry.CONTENT_URI, null, null);
+
+//        db = mDBHelper.getWritableDatabase();
+//        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + LegoEntry.TABLE_NAME + "'");
+//        db.delete(LegoEntry.TABLE_NAME, null, null);
+//        cursor.close();
     }
 
     @Override
