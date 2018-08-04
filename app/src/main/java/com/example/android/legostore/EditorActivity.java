@@ -80,13 +80,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (currentUri == null) {
             //Validate that the input fields are not empty
-            if (TextUtils.isEmpty(mProductName.getText().toString()) &&
-                    TextUtils.isEmpty(mPrice.getText().toString()) &&
-                    TextUtils.isEmpty(mQuantity.getText().toString()) &&
-                    TextUtils.isEmpty(mSupplierName.getText().toString()) &&
+            if (TextUtils.isEmpty(mProductName.getText().toString()) ||
+                    TextUtils.isEmpty(mPrice.getText().toString()) ||
+                    TextUtils.isEmpty(mQuantity.getText().toString()) ||
+                    TextUtils.isEmpty(mSupplierName.getText().toString()) ||
                     TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
                 Toast.makeText(this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
                 finish();
+                startActivity(getIntent());
             } else {
 
                 // Insert a new product into the provider, returning the content URI for the new item.
