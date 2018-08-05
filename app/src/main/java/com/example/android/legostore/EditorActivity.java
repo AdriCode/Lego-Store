@@ -91,8 +91,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 startActivity(getIntent());
             } else {
 
-                // Insert a new product into the provider, returning the content URI for the new item.
-                Uri newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
+                Uri newUri = null;
+
+                if (InputValidation(values)){
+                    // Insert a new product into the provider, returning the content URI for the new item.
+                    newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
+                }
 
                 // Show a toast message depending on whether or not the insertion was successful
                 if (newUri == null) {
@@ -106,10 +110,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
             }
         } else {
-            //Update product after edition
-            String selection = LegoEntry.COLUMN_ID + "=?";
-            String[] selectionArgs = new String[] { String.valueOf(ContentUris.parseId(currentUri)) };
-            int updated = getContentResolver().update(currentUri, values, selection, selectionArgs);
+
+            int updated = 0;
+
+            if (InputValidation(values)) {
+                //Update product after edition
+                String selection = LegoEntry.COLUMN_ID + "=?";
+                String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
+                updated = getContentResolver().update(currentUri, values, selection, selectionArgs);
+            }
 
             // Show a toast message depending on whether or not the update was successful.
             if (updated == 0) {
@@ -167,5 +176,37 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantity.setText("");
         mSupplierName.setText("");
         mSupplierPhone.setText("");
+    }
+
+    private boolean InputValidation(ContentValues values) {
+
+        final String priceRegExp = "((\\d{1,4})(((\\.)(\\d{0,2})){0,1}))";
+        final String numberRegExp = "\\d+";
+        boolean flag = true;
+
+        // Check that the quantity is not negative or a string
+        String quantity = values.getAsString(LegoEntry.COLUMN_QUANTITY);
+        if (!quantity.matches(numberRegExp)) {
+            flag = false;
+            Toast.makeText(this, getString(R.string.invalidate_quantity),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        // Check that the price is a regular expression
+        String price = values.getAsString(LegoEntry.COLUMN_PRICE);
+        if (!price.matches(priceRegExp) || price.equals("0")) {
+            flag = false;
+            Toast.makeText(this, getString(R.string.invalidate_price),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        // Check that the supplier phone is a number
+        String supplierPhone = values.getAsString(LegoEntry.COLUMN_SUPPLIER_PHONE);
+        if (!supplierPhone.matches(numberRegExp)) {
+            flag = false;
+            Toast.makeText(this, getString(R.string.invalidate_supplier_phone),
+                    Toast.LENGTH_SHORT).show();
+        }
+        return flag;
     }
 }

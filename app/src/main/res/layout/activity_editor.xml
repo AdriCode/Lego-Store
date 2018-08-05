@@ -38,7 +38,7 @@
             <!-- Label -->
             <TextView
                 style="@style/EditorStyle2"
-                android:text="@string/price" />
+                android:text="@string/price2" />
 
             <!-- Price field -->
             <EditText
@@ -93,7 +93,7 @@
             <!-- Label -->
             <TextView
                 style="@style/EditorStyle2"
-                android:text="@string/supplierPhone" />
+                android:text="@string/supplierPhone2" />
 
             <!-- Supplier Phone field -->
             <EditText
