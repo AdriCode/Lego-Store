@@ -1,6 +1,7 @@
 package com.example.android.legostore;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -105,7 +106,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
             }
         } else {
-            int updated = getContentResolver().update(currentUri, values, null, null);
+            //Update product after edition
+            String selection = LegoEntry.COLUMN_ID + "=?";
+            String[] selectionArgs = new String[] { String.valueOf(ContentUris.parseId(currentUri)) };
+            int updated = getContentResolver().update(currentUri, values, selection, selectionArgs);
 
             // Show a toast message depending on whether or not the update was successful.
             if (updated == 0) {
