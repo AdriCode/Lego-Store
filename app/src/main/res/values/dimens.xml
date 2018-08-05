@@ -21,5 +21,6 @@
     <!-- Editor -->
     <dimen name="editor_padding">14dp</dimen>
     <dimen name="editor_input">6dp</dimen>
+    <dimen name="drawablePadding">4dp</dimen>
 
 </resources>

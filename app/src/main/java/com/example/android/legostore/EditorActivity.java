@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.legostore.data.LegoContract.LegoEntry;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -189,6 +193,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSupplierPhone.setText("");
     }
 
+    //Method that validates the input for price
+    // and quantity in editor using regular expressions
     private boolean InputValidation(ContentValues values) {
 
         final String priceRegExp = "((\\d{1,4})(((\\.)(\\d{0,2})){0,1}))";
@@ -211,13 +217,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     Toast.LENGTH_SHORT).show();
         }
 
-        // Check that the supplier phone is a number
-        String supplierPhone = values.getAsString(LegoEntry.COLUMN_SUPPLIER_PHONE);
-        if (!supplierPhone.matches(numberRegExp)) {
-            flag = false;
-            Toast.makeText(this, getString(R.string.invalidate_supplier_phone),
-                    Toast.LENGTH_SHORT).show();
-        }
         return flag;
     }
 }

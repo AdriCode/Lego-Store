@@ -50,4 +50,8 @@
         <item name="android:backgroundTint">@android:color/holo_orange_light</item>
     </style>
 
+    <style name="ActionButton" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:padding">@dimen/drawablePadding</item>
+    </style>
+
 </resources>

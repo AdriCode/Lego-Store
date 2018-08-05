@@ -45,7 +45,7 @@
                 android:id="@+id/price"
                 style="@style/EditorStyle"
                 android:hint="@string/price"
-                android:inputType="textCapWords" />
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +63,7 @@
                 android:id="@+id/quantity"
                 style="@style/EditorStyle"
                 android:hint="@string/quantity"
-                android:inputType="textCapWords" />
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -93,16 +93,16 @@
             <!-- Label -->
             <TextView
                 style="@style/EditorStyle2"
-                android:text="@string/supplierPhone2" />
+                android:text="@string/supplierPhone" />
 
             <!-- Supplier Phone field -->
             <EditText
                 android:id="@+id/supplierPhone"
                 style="@style/EditorStyle"
                 android:hint="@string/supplierPhone"
-                android:inputType="textCapWords" />
+                android:digits="0123456789+"
+                android:inputType="phone" />
         </LinearLayout>
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

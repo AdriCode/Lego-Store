@@ -13,15 +13,6 @@
     <string name="quantity">Quantity</string>
     <string name="supplierName">Supplier Name</string>
     <string name="supplierPhone">Supplier Phone</string>
-    <string name="supplierPhone2">Supplier Phone \n(only numbers)</string>
-    <string name="invalidate_quantity">Quantity must be a number</string>
-    <string name="invalidate_price">Invalidate price</string>
-    <string name="invalidate_supplier_phone">Supplier phone must be a number</string>
-    <string name="save_lego_successful">Lego saved</string>
-    <string name="save_lego_failed">Error with saving product</string>
-    <string name="update_lego_successful">Lego Updated</string>
-    <string name="update_lego_failed">Error with updating product</string>
-    <string name="fields_empty">Please, insert all product details</string>
 
     <!-- Menu Main -->
     <string name="deleteAll">Delete All</string>
@@ -32,5 +23,15 @@
     <!-- Menu Editor -->
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+
+    <!-- Validations -->
+    <string name="invalidate_quantity">Quantity must be a number</string>
+    <string name="invalidate_price">Invalidate price</string>
+    <string name="invalidate_supplier_phone">Invalidate phone</string>
+    <string name="save_lego_successful">Lego saved</string>
+    <string name="save_lego_failed">Error with saving product</string>
+    <string name="update_lego_successful">Lego Updated</string>
+    <string name="update_lego_failed">Error with updating product</string>
+    <string name="fields_empty">Please, insert all product details</string>
 
 </resources>

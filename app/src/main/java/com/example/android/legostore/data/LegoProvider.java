@@ -3,12 +3,9 @@ package com.example.android.legostore.data;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-
-import com.example.android.legostore.R;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 import android.content.UriMatcher;
 import android.support.annotation.NonNull;
@@ -112,6 +109,9 @@ public class LegoProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, id);
     }
 
+    /**
+     * Delete a product into the database. Return result of operation.
+     */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         // Get writable database
@@ -127,6 +127,9 @@ public class LegoProvider extends ContentProvider {
         return dataDeleted;
     }
 
+    /**
+     * Update a product into the database. Return result of operation.
+     */
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         // Get writeable database
