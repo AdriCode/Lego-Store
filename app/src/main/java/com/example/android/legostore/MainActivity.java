@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Shows delete all products action at the app bar
         switch (item.getItemId()) {
             case R.id.action_deleteAll:
                 deleteAll();
@@ -85,33 +85,32 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    //Method that delete all the products from the database
     private void deleteAll() {
         getContentResolver().delete(LegoEntry.CONTENT_URI, null, null);
-
-//        db = mDBHelper.getWritableDatabase();
-//        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + LegoEntry.TABLE_NAME + "'");
-//        db.delete(LegoEntry.TABLE_NAME, null, null);
-//        cursor.close();
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // Define a projection that specifies the columns from the table
         String[] projection = {
                 LegoEntry.COLUMN_ID,
                 LegoEntry.COLUMN_PRODUCT_NAME,
                 LegoEntry.COLUMN_PRICE,
                 LegoEntry.COLUMN_QUANTITY,
         };
+        // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this, LegoEntry.CONTENT_URI, projection, null, null, null);
     }
 
+    // Update {@link LegoCursorAdapter} with this new cursor containing updated Lego data
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         adapter.swapCursor(data);
     }
 
+    // Callback called when the data needs to be deleted
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.swapCursor(null);
+    public void onLoaderReset(Loader<Cursor> loader) { adapter.swapCursor(null);
     }
 }

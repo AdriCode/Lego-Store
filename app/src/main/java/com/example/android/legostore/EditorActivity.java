@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +19,9 @@ import android.widget.Toast;
 
 import com.example.android.legostore.data.LegoContract.LegoEntry;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+/**
+ * Allows user to create a new Lego or edit an existing one.
+ */
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LEGO_LOADER = 0;
@@ -38,6 +37,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        // Examine the intent that was used to launch this activity,
+        // in order to figure out if we're creating a new lego or editing an existing one.
         Intent intent = getIntent();
         currentUri = intent.getData();
 
@@ -61,29 +62,29 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             case R.id.action_save:
+                // Respond to a click on the "Save" menu option
                 saveData();
                 finish();
                 return true;
             case R.id.action_delete:
+                // Respond to a click on the "Delete" menu option
                 deleteProduct();
                 finish();
                 return true;
             case android.R.id.home:
+                // Respond to a click on the "Up" arrow button in the app bar
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteProduct(){
-        //Delete current product from the database
-        String selection = LegoEntry.COLUMN_ID + "=?";
-        String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
-        getContentResolver().delete(currentUri, selection, selectionArgs);
-    }
-
+    /**
+     * Get user input from editor and save or update product into database.
+     */
     private void saveData() {
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
@@ -148,8 +149,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
+    /**
+     * Delete current product from the database.
+     */
+    private void deleteProduct(){
+        String selection = LegoEntry.COLUMN_ID + "=?";
+        String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
+        getContentResolver().delete(currentUri, selection, selectionArgs);
+    }
+
+    // Find all relevant views that we will need to read user input from
     private void getViews() {
-        // Find all relevant views that we will need to read user input from
         mProductName = (EditText) findViewById(R.id.productName);
         mPrice = (EditText) findViewById(R.id.price);
         mQuantity = (EditText) findViewById(R.id.quantity);
@@ -167,6 +177,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 LegoEntry.COLUMN_SUPPLIER_NAME,
                 LegoEntry.COLUMN_SUPPLIER_PHONE,
         };
+        // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this, currentUri, projection, null, null, null);
     }
 
@@ -185,6 +196,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        // If the loader is invalidated, clear out all the data from the input fields
         loader.reset();
         mProductName.setText("");
         mPrice.setText("");

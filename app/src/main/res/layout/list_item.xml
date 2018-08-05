@@ -20,7 +20,6 @@
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
@@ -56,6 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/item_padding2"
+                    android:paddingEnd="@dimen/item_padding2"
                     android:text="@string/quantityLabel"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_text_size" />
@@ -80,9 +80,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/item_padding2"
+                    android:paddingEnd="@dimen/item_padding2"
                     android:text="@string/priceLabel"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_text_size" />
+                    android:textSize="@dimen/item_text_size"
+                    />
 
                 <TextView
                     android:id="@+id/price"
@@ -99,6 +101,5 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="@dimen/button_height"
             android:text="@string/sale" />
-
     </LinearLayout>
 </LinearLayout>
