@@ -17,6 +17,7 @@
     <string name="deleteAll">Delete All</string>
     <string name="sale">Sale</string>
     <string name="delete">Delete</string>
+    <string name="negative">Not enough product in stock</string>
 
     <!-- Menu Editor -->
     <string name="action_save">Save</string>

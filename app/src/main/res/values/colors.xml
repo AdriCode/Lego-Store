@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#0396FF</color>
     <color name="colorAccent">#f24343</color>
     <color name="primary_text">#212121</color>
+    <color name="button">#f4f141</color>
 
     <!-- Colors for the Editor -->
     <color name="EditorColorPrimary">#81FBB8</color>
