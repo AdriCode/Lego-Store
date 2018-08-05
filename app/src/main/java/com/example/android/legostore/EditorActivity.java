@@ -62,11 +62,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 saveData();
                 finish();
                 return true;
+            case R.id.action_delete:
+                deleteProduct();
+                finish();
+                return true;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteProduct(){
+        //Delete current product from the database
+        String selection = LegoEntry.COLUMN_ID + "=?";
+        String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
+        getContentResolver().delete(currentUri, selection, selectionArgs);
     }
 
     private void saveData() {
