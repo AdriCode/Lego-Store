@@ -39,15 +39,26 @@
         <item name="android:fontFamily">@font/robotoslabbold</item>
     </style>
 
+    <!-- Editor fields 3-->
+    <style name="EditorStyle3">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/robotoslabbold</item>
+    </style>
+
     <!-- Button style -->
-    <style name="button">
+    <style name="btn">
         <item name="android:textSize">@dimen/item_text_size</item>
         <item name="android:textColor">@android:color/background_light</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:backgroundTint">@android:color/holo_orange_light</item>
+        <item name="android:backgroundTint">#ECE44F</item>
     </style>
 
     <style name="ActionButton" parent="@android:style/Theme.Holo.Light.DarkActionBar">

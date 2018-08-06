@@ -22,5 +22,11 @@
     <dimen name="editor_padding">14dp</dimen>
     <dimen name="editor_input">6dp</dimen>
     <dimen name="drawablePadding">4dp</dimen>
+    <dimen name="quantity_button_height">30dp</dimen>
+    <dimen name="quantity_button_decr_margin_right">2dp</dimen>
+    <dimen name="quantity_button_weight">0.2</dimen>
+    <dimen name="quantity_button_incr_text_size">16sp</dimen>
+    <dimen name="quantity_button_decr_text_size">18sp</dimen>
+
 
 </resources>

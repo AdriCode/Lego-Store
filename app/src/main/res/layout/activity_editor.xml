@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/editor_padding">
+        android:padding="@dimen/editor_padding"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,8 +57,33 @@
 
             <!-- Label -->
             <TextView
-                style="@style/EditorStyle2"
+                style="@style/EditorStyle3"
                 android:text="@string/quantity" />
+
+            <Button
+                android:id="@+id/increase"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/quantity_button_height"
+                android:layout_weight="@dimen/quantity_button_weight"
+                android:background="@color/EditorColorPrimaryDark"
+                android:text="@string/increase"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/quantity_button_incr_text_size" />
+
+            <Button
+                android:id="@+id/decrease"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/quantity_button_height"
+                android:layout_weight="@dimen/quantity_button_weight"
+                android:background="@color/EditorColorPrimary"
+                android:text="@string/decrease"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/quantity_button_decr_text_size"
+                android:textSize="@dimen/quantity_button_decr_text_size" />
 
             <!-- Quantity field -->
             <EditText
@@ -99,8 +126,8 @@
             <EditText
                 android:id="@+id/supplierPhone"
                 style="@style/EditorStyle"
-                android:hint="@string/supplierPhone"
                 android:digits="0123456789+"
+                android:hint="@string/supplierPhone"
                 android:inputType="phone" />
         </LinearLayout>
 
