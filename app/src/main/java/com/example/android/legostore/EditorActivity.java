@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,11 +33,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mSupplierName;
     private EditText mSupplierPhone;
     private Uri currentUri;
+    private EditText mQuan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        //Quantity buttons
+        Button inc = findViewById(R.id.increase);
+        Button dec = findViewById(R.id.decrease);
+
+        mQuan = findViewById(R.id.quantity);
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new lego or editing an existing one.
@@ -51,6 +60,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         //Views relate to the inputs about the product
         getViews();
+
+        //Increase the quantity of the product
+        inc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = mQuan.getText().toString();
+                if (TextUtils.isEmpty(quantity)){
+                    quantity = "0";
+                }
+                mQuan.setText(String.valueOf(Integer.parseInt(quantity) + 1));
+            }
+        });
+
+        //Decrease the quantity of the product
+        dec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantity = mQuan.getText().toString();
+                if (TextUtils.isEmpty(quantity)){
+                    quantity = "0";
+                }
+
+                if (!quantity.equals("0")) {
+                    mQuan.setText(String.valueOf(Integer.parseInt(quantity) - 1));
+                }
+            }
+        });
     }
 
     @Override
@@ -82,6 +118,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
+    // Inactivate Delete option for new products
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (currentUri == null) {
+            MenuItem menuItem = menu.findItem(R.id.action_delete);
+            menuItem.setVisible(false);
+        }
+        return true;
+    }
+
     /**
      * Get user input from editor and save or update product into database.
      */
@@ -109,7 +156,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
                 Uri newUri = null;
 
-                if (InputValidation(values)){
+                if (InputValidation(values)) {
                     // Insert a new product into the provider, returning the content URI for the new item.
                     newUri = getContentResolver().insert(LegoEntry.CONTENT_URI, values);
                 }
@@ -152,7 +199,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     /**
      * Delete current product from the database.
      */
-    private void deleteProduct(){
+    private void deleteProduct() {
         String selection = LegoEntry.COLUMN_ID + "=?";
         String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
         getContentResolver().delete(currentUri, selection, selectionArgs);
@@ -208,7 +255,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     //Method that validates the input for price
     // and quantity in editor using regular expressions
     private boolean InputValidation(ContentValues values) {
-
         final String priceRegExp = "((\\d{1,4})(((\\.)(\\d{0,2})){0,1}))";
         final String numberRegExp = "\\d+";
         boolean flag = true;
@@ -228,7 +274,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, getString(R.string.invalidate_price),
                     Toast.LENGTH_SHORT).show();
         }
-
         return flag;
     }
 }

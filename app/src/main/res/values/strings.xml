@@ -27,6 +27,7 @@
     <string name="action_delete">Delete</string>
 
     <!-- Validations -->
+    <string name="dcr_validation">Quantity cannot be negative</string>
     <string name="invalidate_quantity">Quantity must be a number</string>
     <string name="invalidate_price">Invalidate price</string>
     <string name="invalidate_supplier_phone">Invalidate phone</string>

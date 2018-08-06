@@ -53,12 +53,12 @@
     <!-- Button style -->
     <style name="btn">
         <item name="android:textSize">@dimen/item_text_size</item>
-        <item name="android:textColor">@android:color/background_light</item>
+        <item name="android:textColor">@color/primary_text</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:backgroundTint">#ECE44F</item>
+        <item name="android:backgroundTint">#FBEF1E</item>
     </style>
 
     <style name="ActionButton" parent="@android:style/Theme.Holo.Light.DarkActionBar">
