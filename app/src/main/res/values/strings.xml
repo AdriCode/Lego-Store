@@ -2,6 +2,8 @@
     <string name="app_name">LEGO Store</string>
     <string name="add_lego_title">Add a LEGO</string>
     <string name="edit_lego_title">Edit LEGO</string>
+    <string name="default_text">Welcome! Please, insert legos with the red button.</string>
+    <string name="order">Order</string>
 
     <!-- Editor -->
     <string name="productName">Product Name</string>

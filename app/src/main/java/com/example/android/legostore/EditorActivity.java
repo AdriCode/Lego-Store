@@ -34,17 +34,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mSupplierPhone;
     private Uri currentUri;
     private EditText mQuan;
+    private EditText mPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        //Quantity buttons
+        //Buttons for clickListener
         Button inc = findViewById(R.id.increase);
         Button dec = findViewById(R.id.decrease);
+        Button order = findViewById(R.id.order);
 
         mQuan = findViewById(R.id.quantity);
+        mPhone = findViewById(R.id.supplierPhone);
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new lego or editing an existing one.
@@ -85,6 +88,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 if (!quantity.equals("0")) {
                     mQuan.setText(String.valueOf(Integer.parseInt(quantity) - 1));
                 }
+            }
+        });
+
+        //Call to Order product
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone = mPhone.getText().toString().trim();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + phone));
+                startActivity(intent);
             }
         });
     }
@@ -255,7 +269,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     //Method that validates the input for price
     // and quantity in editor using regular expressions
     private boolean InputValidation(ContentValues values) {
-        final String priceRegExp = "((\\d{1,4})(((\\.)(\\d{0,2})){0,1}))";
+        final String priceRegExp = "((\\d{1,5})(((\\.)(\\d{0,2})){0,1}))";
         final String numberRegExp = "\\d+";
         boolean flag = true;
 

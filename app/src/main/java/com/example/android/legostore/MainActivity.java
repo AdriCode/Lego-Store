@@ -14,16 +14,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import com.example.android.legostore.data.LegoContract.LegoEntry;
-import com.example.android.legostore.data.LegoDBHelper;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LEGO_LOADER = 0;
     private ProductCursorAdapter adapter;
-    private LegoDBHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         GridView listView = findViewById(R.id.list_view);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
-        View emptyView = findViewById(R.id.empty_view);
+        TextView emptyView = findViewById(R.id.empty_view);
+        //Setting default text When there is no information to display in the database
+        emptyView.setText(R.string.default_text);
+        emptyView.setBackgroundResource(R.drawable.lego_empty2);
         listView.setEmptyView(emptyView);
 
         //Setting the cursor adapter

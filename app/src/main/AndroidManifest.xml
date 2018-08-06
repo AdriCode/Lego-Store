@@ -30,4 +30,5 @@
             android:authorities="com.example.android.legostore"
             android:exported="false" />
     </application>
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 </manifest>

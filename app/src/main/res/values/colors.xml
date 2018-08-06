@@ -6,6 +6,8 @@
     <color name="colorAccent">#f24343</color>
     <color name="primary_text">#212121</color>
     <color name="button">#f4f141</color>
+    <color name="itemBackground">#F7F3ED</color>
+    <color name="order">#3498DB</color>
 
     <!-- Colors for the Editor -->
     <color name="EditorColorPrimary">#81FBB8</color>
