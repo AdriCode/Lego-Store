@@ -345,7 +345,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private void deleteProduct() {
         String selection = LegoEntry.COLUMN_ID + "=?";
         String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
-        getContentResolver().delete(currentUri, selection, selectionArgs);
+        int dataDeleted = getContentResolver().delete(currentUri, selection, selectionArgs);
+
+        // Show a toast message depending on whether or not the delete was successful.
+        if (dataDeleted == 0) {
+            // If no rows were deleted, then there was an error with the delete.
+            Toast.makeText(this, getString(R.string.editor_delete_product_failed),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the delete was successful and a toast is displayed.
+            Toast.makeText(this, getString(R.string.editor_delete_product_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
         finish();
     }
 

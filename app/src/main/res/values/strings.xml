@@ -17,6 +17,8 @@
     <string name="supplierPhone">Supplier Phone</string>
     <string name="increase">+</string>
     <string name="decrease">-</string>
+    <string name="editor_delete_product_failed">Lego was not deleted</string>
+    <string name="editor_delete_product_successful">Lego was deleted</string>
 
     <!-- Menu Main -->
     <string name="deleteAll">Delete All</string>
