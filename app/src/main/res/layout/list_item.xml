@@ -59,10 +59,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:paddingEnd="@dimen/item_padding2"
                     android:paddingRight="@dimen/item_padding2"
                     android:text="@string/quantityLabel"
-                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_text_size" />
 
@@ -86,10 +86,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:paddingEnd="@dimen/item_padding2"
                     android:paddingRight="@dimen/item_padding2"
                     android:text="@string/priceLabel"
-                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_text_size" />
 

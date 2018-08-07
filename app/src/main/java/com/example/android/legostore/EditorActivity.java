@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,7 +93,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
                 String quantity = mQuan.getText().toString();
-                if (TextUtils.isEmpty(quantity)){
+                if (TextUtils.isEmpty(quantity)) {
                     quantity = "0";
                 }
                 mQuan.setText(String.valueOf(Integer.parseInt(quantity) + 1));
@@ -104,7 +105,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
                 String quantity = mQuan.getText().toString();
-                if (TextUtils.isEmpty(quantity)){
+                if (TextUtils.isEmpty(quantity)) {
                     quantity = "0";
                 }
 
@@ -202,13 +203,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return true;
     }
 
-    private boolean emptyFields(){
+    private boolean emptyFields() {
         boolean flag = false;
         if (TextUtils.isEmpty(mProductName.getText().toString()) ||
                 TextUtils.isEmpty(mPrice.getText().toString()) ||
                 TextUtils.isEmpty(mQuantity.getText().toString()) ||
                 TextUtils.isEmpty(mSupplierName.getText().toString()) ||
-                TextUtils.isEmpty(mSupplierPhone.getText().toString())){
+                TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
             flag = true;
         }
         return flag;
@@ -352,6 +353,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private void getViews() {
         mProductName = (EditText) findViewById(R.id.productName);
         mPrice = (EditText) findViewById(R.id.price);
+        mPrice.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         mQuantity = (EditText) findViewById(R.id.quantity);
         mSupplierName = (EditText) findViewById(R.id.supplierName);
         mSupplierPhone = (EditText) findViewById(R.id.supplierPhone);
