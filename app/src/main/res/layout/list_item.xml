@@ -35,10 +35,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/item_img_margin_bottom"
+        android:layout_marginEnd="@dimen/item_img_margin_bottom"
+        android:layout_marginLeft="@dimen/item_img_margin_bottom"
+        android:layout_marginRight="@dimen/item_img_margin_bottom"
+        android:layout_marginStart="@dimen/item_img_margin_bottom"
         android:background="@android:color/white"
-        android:padding="@dimen/item_padding2"
-        android:layout_marginBottom="@dimen/item_img_margin_bottom">
+        android:orientation="vertical"
+        android:padding="@dimen/item_padding2">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -49,15 +53,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/item_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="@dimen/item_padding2"
                     android:paddingEnd="@dimen/item_padding2"
+                    android:paddingRight="@dimen/item_padding2"
                     android:text="@string/quantityLabel"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/item_text_size" />
 
@@ -65,6 +70,7 @@
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/item_text_size"
                     tools:text="Quantity" />
             </LinearLayout>
@@ -74,23 +80,24 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Q"
                 android:layout_centerHorizontal="true"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/item_padding">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="@dimen/item_padding2"
                     android:paddingEnd="@dimen/item_padding2"
+                    android:paddingRight="@dimen/item_padding2"
                     android:text="@string/priceLabel"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/item_text_size"
-                    />
+                    android:textSize="@dimen/item_text_size" />
 
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/item_text_size"
                     tools:text="Price" />
             </LinearLayout>

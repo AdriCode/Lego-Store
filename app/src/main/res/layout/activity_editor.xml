@@ -46,7 +46,7 @@
                 android:id="@+id/price"
                 style="@style/EditorStyle"
                 android:hint="@string/price"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal|number" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,13 +76,15 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/quantity_button_height"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/quantity_button_decr_text_size"
+                android:layout_marginEnd="@dimen/quantity_button_decr_margin_right"
+                android:layout_marginRight="@dimen/quantity_button_decr_margin_right"
                 android:layout_weight="@dimen/quantity_button_weight"
                 android:background="@color/EditorColorPrimary"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/decrease"
-                android:textSize="@dimen/quantity_button_decr_text_size" />
+                android:textSize="@dimen/quantity_button_decr_text_size"
+                 />
 
             <!-- Quantity field -->
             <EditText

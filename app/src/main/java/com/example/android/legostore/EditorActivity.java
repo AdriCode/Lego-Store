@@ -87,9 +87,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             getLoaderManager().initLoader(LEGO_LOADER, null, this);
         }
 
-        //Views relate to the inputs about the product
-        getViews();
-
         //Increase the quantity of the product
         inc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +121,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 String phone = mPhone.getText().toString().trim();
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + phone));
-                startActivity(intent);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -164,7 +163,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             case R.id.action_save:
                 // Respond to a click on the "Save" menu option
                 saveData();
-                finish();
                 return true;
             case R.id.action_delete:
                 // Respond to a click on the "Delete" menu option
@@ -204,6 +202,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return true;
     }
 
+    private boolean emptyFields(){
+        boolean flag = false;
+        if (TextUtils.isEmpty(mProductName.getText().toString()) ||
+                TextUtils.isEmpty(mPrice.getText().toString()) ||
+                TextUtils.isEmpty(mQuantity.getText().toString()) ||
+                TextUtils.isEmpty(mSupplierName.getText().toString()) ||
+                TextUtils.isEmpty(mSupplierPhone.getText().toString())){
+            flag = true;
+        }
+        return flag;
+    }
+
     /**
      * Get user input from editor and save or update product into database.
      */
@@ -219,14 +229,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (currentUri == null) {
             //Validate that the input fields are not empty
-            if (TextUtils.isEmpty(mProductName.getText().toString()) ||
-                    TextUtils.isEmpty(mPrice.getText().toString()) ||
-                    TextUtils.isEmpty(mQuantity.getText().toString()) ||
-                    TextUtils.isEmpty(mSupplierName.getText().toString()) ||
-                    TextUtils.isEmpty(mSupplierPhone.getText().toString())) {
+            if (emptyFields()) {
                 Toast.makeText(this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(getIntent());
+                return;
             } else {
 
                 Uri newUri = null;
@@ -255,7 +260,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 //Update product after edition
                 String selection = LegoEntry.COLUMN_ID + "=?";
                 String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
-                updated = getContentResolver().update(currentUri, values, selection, selectionArgs);
+                //Validate that the input fields are not empty
+                if (emptyFields()) {
+                    Toast.makeText(this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    updated = getContentResolver().update(currentUri, values, selection, selectionArgs);
+                }
             }
 
             // Show a toast message depending on whether or not the update was successful.
@@ -269,6 +280,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
 
@@ -398,7 +410,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     Toast.LENGTH_SHORT).show();
         }
 
-        // Check that the price is a regular expression
+        // Check that the price is a number that could have the format XXXXX.XX
         String price = values.getAsString(LegoEntry.COLUMN_PRICE);
         if (!price.matches(priceRegExp) || price.equals("0")) {
             flag = false;

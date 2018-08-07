@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/main_padding"
     android:background="@color/itemBackground"
+    android:padding="@dimen/main_padding"
     tools:context=".MainActivity">
 
     <GridView
@@ -25,9 +25,9 @@
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:background="@color/itemBackground"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/itemBackground" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
