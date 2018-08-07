@@ -29,5 +29,4 @@
     <dimen name="quantity_button_incr_text_size">16sp</dimen>
     <dimen name="quantity_button_decr_text_size">18sp</dimen>
 
-
 </resources>

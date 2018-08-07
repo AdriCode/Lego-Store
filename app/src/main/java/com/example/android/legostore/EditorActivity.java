@@ -58,17 +58,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         //Get the views relate to the details of the product
         getViews();
 
+        //Buttons for clickListener
+        Button inc = findViewById(R.id.increase);
+        Button dec = findViewById(R.id.decrease);
+        Button order = findViewById(R.id.order);
+
         //Listener to checked changing in the product
         mProductName.setOnTouchListener(mTouchListener);
         mPrice.setOnTouchListener(mTouchListener);
         mQuantity.setOnTouchListener(mTouchListener);
         mSupplierName.setOnTouchListener(mTouchListener);
         mSupplierPhone.setOnTouchListener(mTouchListener);
-
-        //Buttons for clickListener
-        Button inc = findViewById(R.id.increase);
-        Button dec = findViewById(R.id.decrease);
-        Button order = findViewById(R.id.order);
+        inc.setOnTouchListener(mTouchListener);
+        dec.setOnTouchListener(mTouchListener);
 
         mQuan = findViewById(R.id.quantity);
         mPhone = findViewById(R.id.supplierPhone);
