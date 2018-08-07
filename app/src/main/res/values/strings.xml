@@ -39,4 +39,11 @@
     <string name="update_lego_failed">Error with updating product</string>
     <string name="fields_empty">Please, insert all product details</string>
 
+    <!-- Dialogs -->
+    <string name="unsaved">Discard changes?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep editing</string>
+    <string name="warning">Would you like to delete this product?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

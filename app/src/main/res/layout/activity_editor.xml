@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -64,25 +63,25 @@
                 android:id="@+id/increase"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/quantity_button_height"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="@dimen/quantity_button_weight"
                 android:background="@color/EditorColorPrimaryDark"
-                android:text="@string/increase"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_gravity="center_vertical"
+                android:text="@string/increase"
                 android:textSize="@dimen/quantity_button_incr_text_size" />
 
             <Button
                 android:id="@+id/decrease"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/quantity_button_height"
-                android:layout_weight="@dimen/quantity_button_weight"
-                android:background="@color/EditorColorPrimary"
-                android:text="@string/decrease"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/quantity_button_decr_text_size"
+                android:layout_weight="@dimen/quantity_button_weight"
+                android:background="@color/EditorColorPrimary"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/decrease"
                 android:textSize="@dimen/quantity_button_decr_text_size" />
 
             <!-- Quantity field -->
@@ -143,9 +142,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@color/order"
-            android:textColor="@android:color/white"
             android:clickable="true"
             android:focusable="true"
-            android:text="@string/order"/>
+            android:text="@string/order"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </RelativeLayout>

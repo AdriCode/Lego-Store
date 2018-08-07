@@ -1,9 +1,11 @@
 package com.example.android.legostore;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,10 +39,31 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mQuan;
     private EditText mPhone;
 
+    //OnTouchListener that listens for any user touches on a View
+    //If any change the mLegoHasChanged boolean is set to true.
+    private boolean mLegoHasChanged = false;
+    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            mLegoHasChanged = true;
+            return false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        //Get the views relate to the details of the product
+        getViews();
+
+        //Listener to checked changing in the product
+        mProductName.setOnTouchListener(mTouchListener);
+        mPrice.setOnTouchListener(mTouchListener);
+        mQuantity.setOnTouchListener(mTouchListener);
+        mSupplierName.setOnTouchListener(mTouchListener);
+        mSupplierPhone.setOnTouchListener(mTouchListener);
 
         //Buttons for clickListener
         Button inc = findViewById(R.id.increase);
@@ -104,6 +128,27 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     @Override
+    public void onBackPressed() {
+        // If the product hasn't changed, continue with handling back button press
+        if (!mLegoHasChanged) {
+            super.onBackPressed();
+            return;
+        }
+
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
+
+        // Show dialog that there are unsaved changes
+        showUnsavedChangesDialog(discardButtonClickListener);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         getMenuInflater().inflate(R.menu.menu_editor, menu);
@@ -121,12 +166,26 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 return true;
             case R.id.action_delete:
                 // Respond to a click on the "Delete" menu option
-                deleteProduct();
-                finish();
+                showDeleteConfirmationDialog();
                 return true;
             case android.R.id.home:
                 // Respond to a click on the "Up" arrow button in the app bar
-                NavUtils.navigateUpFromSameTask(this);
+                if (!mLegoHasChanged) {
+                    NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                    return true;
+                }
+                // Otherwise if there are unsaved changes, setup a dialog to warn the user.
+                DialogInterface.OnClickListener discardButtonClickListener =
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // User clicked "Discard" button, navigate to parent activity.
+                                NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                            }
+                        };
+
+                // Show a dialog that notifies the user they have unsaved changes
+                showUnsavedChangesDialog(discardButtonClickListener);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -210,6 +269,61 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
+
+    /**
+     * Warning the user for unsaved changes
+     */
+    private void showUnsavedChangesDialog(
+            DialogInterface.OnClickListener discardButtonClickListener) {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.unsaved);
+        builder.setPositiveButton(R.string.discard, discardButtonClickListener);
+        builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Keep editing" button, so dismiss the dialog
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    /**
+     * Ask for confirmation before deleting a product
+     */
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative options on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.warning);
+
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "yes" option, so the product will be deleted
+                deleteProduct();
+            }
+        });
+
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "no" option, so dismiss the dialog and keep editing
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     /**
      * Delete current product from the database.
      */
@@ -217,6 +331,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String selection = LegoEntry.COLUMN_ID + "=?";
         String[] selectionArgs = new String[]{String.valueOf(ContentUris.parseId(currentUri))};
         getContentResolver().delete(currentUri, selection, selectionArgs);
+        finish();
     }
 
     // Find all relevant views that we will need to read user input from
