@@ -39,6 +39,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Uri currentUri;
     private EditText mQuan;
     private EditText mPhone;
+    private Button inc;
+    private Button dec;
+    private Button order;
 
     //OnTouchListener that listens for any user touches on a View
     //If any change the mLegoHasChanged boolean is set to true.
@@ -59,22 +62,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         //Get the views relate to the details of the product
         getViews();
 
-        //Buttons for clickListener
-        Button inc = findViewById(R.id.increase);
-        Button dec = findViewById(R.id.decrease);
-        Button order = findViewById(R.id.order);
-
-        //Listener to checked changing in the product
-        mProductName.setOnTouchListener(mTouchListener);
-        mPrice.setOnTouchListener(mTouchListener);
-        mQuantity.setOnTouchListener(mTouchListener);
-        mSupplierName.setOnTouchListener(mTouchListener);
-        mSupplierPhone.setOnTouchListener(mTouchListener);
-        inc.setOnTouchListener(mTouchListener);
-        dec.setOnTouchListener(mTouchListener);
-
-        mQuan = findViewById(R.id.quantity);
-        mPhone = findViewById(R.id.supplierPhone);
+        //Listener to checked changes in the product
+        getListeners();
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new lego or editing an existing one.
@@ -284,7 +273,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         finish();
     }
 
-
     /**
      * Warning the user for unsaved changes
      */
@@ -368,6 +356,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantity = (EditText) findViewById(R.id.quantity);
         mSupplierName = (EditText) findViewById(R.id.supplierName);
         mSupplierPhone = (EditText) findViewById(R.id.supplierPhone);
+        mQuan = findViewById(R.id.quantity);
+        mPhone = findViewById(R.id.supplierPhone);
+        inc = findViewById(R.id.increase);
+        dec = findViewById(R.id.decrease);
+        order = findViewById(R.id.order);
+    }
+
+    //Listen to the changes of the fields
+    private void getListeners(){
+        mProductName.setOnTouchListener(mTouchListener);
+        mPrice.setOnTouchListener(mTouchListener);
+        mQuantity.setOnTouchListener(mTouchListener);
+        mSupplierName.setOnTouchListener(mTouchListener);
+        mSupplierPhone.setOnTouchListener(mTouchListener);
+        inc.setOnTouchListener(mTouchListener);
+        dec.setOnTouchListener(mTouchListener);
     }
 
     @Override
