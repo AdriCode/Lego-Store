@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //Setting default text When there is no information to display in the database
         emptyView.setText(R.string.default_text);
         emptyView.setBackgroundResource(R.drawable.lego_empty2);
+        emptyView.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP);
         listView.setEmptyView(emptyView);
 
         //Setting the cursor adapter

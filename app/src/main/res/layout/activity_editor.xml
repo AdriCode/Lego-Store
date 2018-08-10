@@ -69,6 +69,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/increase"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/quantity_button_incr_text_size" />
 
             <Button
@@ -83,8 +84,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/decrease"
-                android:textSize="@dimen/quantity_button_decr_text_size"
-                 />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/quantity_button_decr_text_size" />
 
             <!-- Quantity field -->
             <EditText
