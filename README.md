@@ -1,9 +1,9 @@
 # Lego-Store
 
-Inventory app that shows the details of Lego products and their availability in stock.
+Inventory app that shows the details of Lego products and their availability.
 
 This app will use a ContentProvider that access a SQLite database which is updated every time the details of the product change. 
-Each product has a sale button that reduces its quantity in stock by one.
+Each product has a sale button that updates its quantity.
 
 The user can add new products to the inventory, see product details, edit product details, and see all the inventory. 
 
